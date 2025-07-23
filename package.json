@@ -1,0 +1,19 @@
+{
+  "name": "namaste-react-code",
+  "version": "1.0.0",
+  "description": "This is namaste react",
+  "scripts": {
+    "start": "parcel index.html",
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.15.4"
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-router": "^7.7.0"
+  }
+}
