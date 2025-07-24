@@ -12,7 +12,7 @@ const Header = () => {
     <div className="heading">
       <div className="logo">
         <div className="logo-img">🍔</div>
-        <div>KhaoPiyo</div>
+        <div>MealMood</div>
       </div>
       <div className="nav-items">
         <ul>
