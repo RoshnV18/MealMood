@@ -3,11 +3,14 @@ import RestroCard from "./RestroCard";
 import Shimmer from "./Shimmer";
 
 import { useEffect, useState } from "react";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
   const [listOfRes, setListOfRes] = useState([]);
   const [inputText, setInputText] = useState("");
   const [filteredRes, setFilteredRes] = useState([]);
+
+  const onlineStatus = useOnlineStatus();
 
   useEffect(() => {
     fetchData();
@@ -38,6 +41,14 @@ const Body = () => {
     );
     setFilteredRes(filteredList);
   };
+
+  if (onlineStatus === false) {
+    return (
+      <h1>
+        Oops, Look like you are offline. please check your internet connection
+      </h1>
+    );
+  }
 
   return !listOfRes.length ? (
     <Shimmer />
