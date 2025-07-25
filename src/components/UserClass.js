@@ -22,9 +22,10 @@ class UserClass extends React.Component {
   }
 
   render() {
-    const { name, location } = this.state.userInfo;
+    const { name, location, avatar_url } = this.state.userInfo;
     return (
       <div>
+        <img src={avatar_url} />
         <h3>Name : {name}</h3>
         <h3>Location :{location}</h3>
       </div>
