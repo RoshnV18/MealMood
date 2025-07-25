@@ -7,6 +7,10 @@ import Error from "./components/Error";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router";
 import Contact from "./components/Contact";
 import RestroMenu from "./components/RestroMenu";
+import { lazy, Suspense } from "react";
+import Shimmer from "./components/Shimmer";
+
+const Grocery = lazy(() => import("./components/Grocery"));
 
 const App = () => {
   return (
@@ -25,6 +29,14 @@ const router = (
         <Route index element={<Body />} />
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
+        <Route
+          path="grocery"
+          element={
+            <Suspense fallback={<Shimmer />}>
+              <Grocery />
+            </Suspense>
+          }
+        />
         <Route path="/restraunt/:resId" element={<RestroMenu />} />
       </Route>
       <Route path="/*" element={<Error />} />
