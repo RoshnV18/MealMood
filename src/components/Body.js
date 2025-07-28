@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import RestroCard from "./RestroCard";
+import RestroCard, { withPromotedLabel } from "./RestroCard";
 import Shimmer from "./Shimmer";
 import { useEffect, useState } from "react";
 import useOnlineStatus from "../utils/useOnlineStatus";
@@ -8,6 +8,7 @@ const Body = () => {
   const [listOfRes, setListOfRes] = useState([]);
   const [inputText, setInputText] = useState("");
   const [filteredRes, setFilteredRes] = useState([]);
+
   const onlineStatus = useOnlineStatus();
 
   useEffect(() => {
@@ -40,6 +41,8 @@ const Body = () => {
     setFilteredRes(filteredList);
   };
 
+  const RestroCardWithPromoted = withPromotedLabel(RestroCard);
+
   if (onlineStatus === false) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-100 to-white">
@@ -62,7 +65,7 @@ const Body = () => {
         <div className="mb-10">
           <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
             <button
-              className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-full font-semibold shadow-md transition-all duration-200"
+              className="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold shadow-md cursor-pointer"
               onClick={() => {
                 const filteredList = listOfRes.filter(
                   (res) => res?.info?.avgRating > 4.5
@@ -76,13 +79,13 @@ const Body = () => {
             <div className="flex w-full sm:w-auto max-w-md">
               <input
                 value={inputText}
-                className="flex-1 px-5 py-3 border border-gray-300 rounded-l-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-800 placeholder-gray-500 shadow-sm"
+                className="flex-1 px-5 py-3 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-800 placeholder-gray-500 shadow-sm"
                 type="text"
                 placeholder="Search restaurants or cuisines..."
                 onChange={(e) => setInputText(e.target.value)}
               />
               <button
-                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-r-full font-semibold shadow-md transition duration-200"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-r-lg font-semibold shadow-md transition duration-200"
                 onClick={handleClick}
               >
                 🔍 Search
@@ -98,7 +101,11 @@ const Body = () => {
               to={"/restraunt/" + restro?.info?.id}
               className="transform hover:scale-105 transition-transform duration-200"
             >
-              <RestroCard resData={restro} />
+              {restro.info.avgRating > 4.4 ? (
+                <RestroCardWithPromoted resData={restro} />
+              ) : (
+                <RestroCard resData={restro} />
+              )}
             </Link>
           ))}
         </div>

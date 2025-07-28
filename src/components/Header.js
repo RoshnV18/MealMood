@@ -12,8 +12,8 @@ const Header = () => {
   };
 
   return (
-    <div className="sticky top-0 z-50 bg-white shadow-md">
-      <div className="flex flex-col sm:flex-row sm:justify-between items-center px-4 py-3 gap-3 sm:gap-0">
+    <div className="sticky top-0 z-50 bg-white shadow-md ">
+      <div className="flex flex-col items-center h-24 bg-[#F6F6F6] sm:flex-row sm:justify-between  px-4 py-3 gap-3 sm:gap-0">
         <div className="flex items-center space-x-3">
           <div className="text-3xl">🍔</div>
           <div className="text-xl font-bold text-gray-800">MealMood</div>

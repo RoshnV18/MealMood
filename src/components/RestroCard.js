@@ -14,9 +14,9 @@ const RestroCard = ({ resData }) => {
     "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/";
 
   return (
-    <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-all  overflow-hidden  cursor-pointer min-h-[400px] min-w-[200px] flex flex-col justify-between">
+    <div className="bg-gray-300  shadow-md hover:shadow-lg hover:bg-gray-400 cursor-pointer min-h-[400px] min-w-[200px] flex flex-col justify-between rounded-xl">
       <div>
-        <div className="relative overflow-hidden">
+        <div className="relative">
           <img
             src={
               cloudinaryImageId
@@ -24,7 +24,7 @@ const RestroCard = ({ resData }) => {
                 : "https://via.placeholder.com/660x480?text=Image+Unavailable"
             }
             alt={name}
-            className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+            className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500 rounded-xl"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full flex items-center space-x-1">
@@ -69,3 +69,16 @@ const RestroCard = ({ resData }) => {
 };
 
 export default RestroCard;
+
+export const withPromotedLabel = (RestroCardComponent) => {
+  return ({ resData }) => {
+    return (
+      <div className="relative">
+        <label className="absolute top-2 left-2 bg-black text-white px-2 py-1 text-xs rounded z-10">
+          PROMOTED
+        </label>
+        <RestroCardComponent resData={resData} />
+      </div>
+    );
+  };
+};
