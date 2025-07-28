@@ -1,5 +1,7 @@
 import { Link } from "react-router";
 
+import { InstagramIcon } from "lucide-react";
+
 const Footer = () => {
   return (
     <footer className="bg-[#f1f0f0]  text-center py-6 text-sm text-gray-600">
@@ -19,8 +21,9 @@ const Footer = () => {
           Contact
         </Link>
       </div>
+      <p>Created by Roshan</p>
 
-      <p className="text-xs text-gray-500">
+      <p className="text-xs text-gray-500 mt-2">
         © 2025 MealMood. All rights reserved.
       </p>
     </footer>

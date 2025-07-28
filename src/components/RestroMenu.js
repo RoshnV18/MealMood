@@ -1,4 +1,5 @@
 import Shimmer from "./Shimmer";
+import RestraunCategory from "./RestraunCategory";
 import { useParams } from "react-router";
 
 import useRestrauntMenu from "../utils/useRestrauntMenu";
@@ -6,7 +7,7 @@ import useRestrauntMenu from "../utils/useRestrauntMenu";
 const RestroMenu = () => {
   const { resId } = useParams();
 
-  const { resItem, resMenu } = useRestrauntMenu(resId);
+  const { resItem, category } = useRestrauntMenu(resId);
 
   if (resItem === null) return <Shimmer />;
 
@@ -14,19 +15,16 @@ const RestroMenu = () => {
     resItem?.cards[2]?.card?.card?.info || {};
 
   return (
-    <div className="menu">
-      <h1>{name}</h1>
-      <h3>{cuisines?.join(", ")}</h3>
-      <h3>{costForTwoMessage}</h3>
-      <h3>Menu</h3>
-      <ul>
-        {resMenu.map((item, index) => (
-          <li key={index}>
-            {item.card.info.name} - ₹
-            {(item.card.info.price || item.card.info.defaultPrice) / 100}
-          </li>
+    <div className="text-center m-4 p-4">
+      <h1 className="text-4xl font-bold">{name}</h1>
+      <h3 className="font-semibold m-4">
+        {cuisines?.join(", ")} - {costForTwoMessage}
+      </h3>
+      <div className="mt-10">
+        {category.map((c, index) => (
+          <RestraunCategory key={index} resData={c?.card?.card} />
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
