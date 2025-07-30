@@ -3,8 +3,11 @@ import RestraunCategory from "./RestraunCategory";
 import { useParams } from "react-router";
 
 import useRestrauntMenu from "../utils/useRestrauntMenu";
+import { useState } from "react";
 
 const RestroMenu = () => {
+  const [showIndex, setShowIndex] = useState(null);
+
   const { resId } = useParams();
 
   const { resItem, category } = useRestrauntMenu(resId);
@@ -22,7 +25,13 @@ const RestroMenu = () => {
       </h3>
       <div className="mt-10 ">
         {category.map((c, index) => (
-          <RestraunCategory key={index} resData={c?.card?.card} />
+          <RestraunCategory
+            key={index}
+            resData={c?.card?.card}
+            showIndex={showIndex}
+            setShowIndex={setShowIndex}
+            index={index}
+          />
         ))}
       </div>
     </div>

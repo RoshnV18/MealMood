@@ -1,11 +1,8 @@
-import { useState } from "react";
 import ItemList from "./ItemList";
 
-const RestraunCategory = ({ resData }) => {
-  const [showItems, setShowItems] = useState(false);
-
+const RestraunCategory = ({ resData, showIndex, setShowIndex, index }) => {
   const handleClick = () => {
-    setShowItems(!showItems);
+    setShowIndex(showIndex === index ? null : index);
   };
 
   return (
@@ -19,7 +16,7 @@ const RestraunCategory = ({ resData }) => {
         </span>
         <span className="text-xl mr-4">⬇️</span>
       </div>
-      {showItems && <ItemList items={resData?.itemCards} />}
+      {showIndex === index && <ItemList items={resData?.itemCards} />}
     </div>
   );
 };
