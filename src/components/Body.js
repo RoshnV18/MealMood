@@ -3,11 +3,13 @@ import RestroCard, { withPromotedLabel } from "./RestroCard";
 import Shimmer from "./Shimmer";
 import { useEffect, useState } from "react";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import Error from "./Error";
 
 const Body = () => {
   const [listOfRes, setListOfRes] = useState([]);
   const [inputText, setInputText] = useState("");
   const [filteredRes, setFilteredRes] = useState([]);
+  const [error, setError] = useState("");
 
   const onlineStatus = useOnlineStatus();
 
@@ -16,17 +18,19 @@ const Body = () => {
   }, []);
 
   const fetchData = async () => {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING"
-    );
-    const json = await data.json();
-
-    const restraurants =
-      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants;
-
-    setListOfRes(restraurants);
-    setFilteredRes(restraurants);
+    try {
+      const data = await fetch(
+        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING"
+      );
+      const json = await data.json();
+      const restraurants =
+        json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants;
+      setListOfRes(restraurants);
+      setFilteredRes(restraurants);
+    } catch (error) {
+      setError(error.message);
+    }
   };
 
   const handleClick = () => {
@@ -42,6 +46,15 @@ const Body = () => {
   };
 
   const RestroCardWithPromoted = withPromotedLabel(RestroCard);
+
+  if (error) {
+    return (
+      <div className="text-2xl text-center mt-10">
+        <Error />
+        <p>{error}</p>
+      </div>
+    );
+  }
 
   if (onlineStatus === false) {
     return (

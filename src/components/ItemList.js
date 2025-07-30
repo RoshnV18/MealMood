@@ -32,7 +32,7 @@ const ItemList = ({ items }) => {
             </div>
             <img
               src={CDN_URL + item.card.info.imageId}
-              className="rounded-lg w-20 mx-auto"
+              className="rounded-lg w-20 h-20 mx-auto"
             />
           </div>
         </div>
