@@ -20,7 +20,7 @@ const RestroMenu = () => {
       <h3 className="font-semibold m-4">
         {cuisines?.join(", ")} - {costForTwoMessage}
       </h3>
-      <div className="mt-10">
+      <div className="mt-10 ">
         {category.map((c, index) => (
           <RestraunCategory key={index} resData={c?.card?.card} />
         ))}

@@ -9,7 +9,7 @@ const RestraunCategory = ({ resData }) => {
   };
 
   return (
-    <div className="w-6/12 mx-auto my-4 bg-gray-100  p-4  rounded-lg">
+    <div className="w-6/12 mx-auto my-4 bg-gray-100  p-4  rounded-lg  shadow-sm">
       <div
         className="flex justify-between cursor-pointer "
         onClick={handleClick}

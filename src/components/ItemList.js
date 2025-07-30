@@ -6,19 +6,21 @@ const ItemList = ({ items }) => {
     <div>
       {items.map((item) => (
         <div
-          className="text-left p-2 m-2 flex justify-between"
+          className="text-left p-2 m-2 flex justify-between border-b-2 border-gray-300"
           key={item.card.info.id}
         >
           <div className="w-9/12">
             <div className="my-2">
-              <span>{item.card.info.name}</span>
-              <span>
+              <span className="font-semibold text-sm">
+                {item.card.info.name}
+              </span>
+              <span className="font-semibold text-sm">
                 - ₹
                 {item.card.info.price / 100 ||
                   item.card.info.defaultPrice / 100}
               </span>
             </div>
-            <p className="text-xs">
+            <p className="text-xs ">
               {item.card.info.description ||
                 "There is no Description of this Item"}
             </p>
