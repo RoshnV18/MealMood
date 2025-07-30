@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 const Header = () => {
   const [input, setInput] = useState("login");
 
   const onlineStatus = useOnlineStatus();
+
+  const { loggedInUser } = useContext(UserContext);
 
   const handleClick = () => {
     input === "login" ? setInput("logout") : setInput("login");
@@ -59,18 +62,19 @@ const Header = () => {
             <li className="text-gray-700 hover:text-blue-600 cursor-pointer transition-colors duration-200">
               Cart
             </li>
-          </ul>
 
-          <button
-            className={`${
-              input === "logout"
-                ? "bg-red-600 hover:bg-red-700"
-                : "bg-blue-600 hover:bg-blue-700"
-            } text-white px-4 py-2 rounded-lg transition-colors duration-200 border-none cursor-pointer font-medium`}
-            onClick={handleClick}
-          >
-            {input}
-          </button>
+            <button
+              className={`${
+                input === "logout"
+                  ? "bg-red-600 hover:bg-red-700"
+                  : "bg-blue-600 hover:bg-blue-700"
+              } text-white px-4 py-2 rounded-lg transition-colors duration-200 border-none cursor-pointer font-medium`}
+              onClick={handleClick}
+            >
+              {input}
+            </button>
+            <li>{loggedInUser}</li>
+          </ul>
         </div>
       </div>
     </div>

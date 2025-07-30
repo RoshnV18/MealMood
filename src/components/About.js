@@ -1,7 +1,6 @@
-import { address } from "motion/react-client";
-import User from "./User.js";
 import UserClass from "./UserClass.js";
 import { Component } from "react";
+import UserContext from "../utils/UserContext.js";
 
 class About extends Component {
   constructor(props) {
@@ -10,9 +9,14 @@ class About extends Component {
 
   render() {
     return (
-      <div>
-        <h1>About Us</h1>
+      <div className="m-2 p-2">
+        <h1 className="text-5xl font-bold"> About Us</h1>
         <UserClass />
+        <UserContext.Consumer>
+          {({ loggedInUser }) => (
+            <h1 className="font-bold text-xl">loggedInUser: {loggedInUser}</h1>
+          )}
+        </UserContext.Consumer>
       </div>
     );
   }
