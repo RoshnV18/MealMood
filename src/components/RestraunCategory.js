@@ -2,17 +2,24 @@ import { useState } from "react";
 import ItemList from "./ItemList";
 
 const RestraunCategory = ({ resData }) => {
-  console.log(resData.itemCards);
+  const [showItems, setShowItems] = useState(false);
+
+  const handleClick = () => {
+    setShowItems(!showItems);
+  };
 
   return (
     <div className="w-6/12 mx-auto my-4 bg-gray-100  p-4  rounded-lg">
-      <div className="flex justify-between ">
+      <div
+        className="flex justify-between cursor-pointer "
+        onClick={handleClick}
+      >
         <span className="font-bold ">
           {resData.title} ({resData.itemCards.length})
         </span>
-        <span className="font-bold text-3xl">˅</span>
+        <span className="text-xl mr-4">⬇️</span>
       </div>
-      <ItemList items={resData?.itemCards} />
+      {showItems && <ItemList items={resData?.itemCards} />}
     </div>
   );
 };
