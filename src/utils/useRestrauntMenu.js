@@ -24,8 +24,6 @@ const useRestrauntMenu = (resId) => {
         "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
     );
 
-    console.log(category);
-
     setCategory(category || []);
   };
 

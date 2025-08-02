@@ -10,6 +10,9 @@ import RestroMenu from "./components/RestroMenu";
 import { lazy, Suspense, useEffect, useState } from "react";
 import Shimmer from "./components/Shimmer";
 import UserContext from "./utils/UserContext";
+import { store } from "./utils/store";
+import { Provider } from "react-redux";
+import Cart from "./components/Cart";
 
 const Grocery = lazy(() => import("./components/Grocery"));
 
@@ -24,17 +27,19 @@ const App = () => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ loggedInUser: userName }}>
-      <div className="flex flex-col min-h-screen">
-        <Header />
+    <Provider store={store}>
+      <UserContext.Provider value={{ loggedInUser: userName }}>
+        <div className="flex flex-col min-h-screen">
+          <Header />
 
-        <main className="flex-grow">
-          <Outlet />
-        </main>
+          <main className="flex-grow">
+            <Outlet />
+          </main>
 
-        <Footer name="Roshan" />
-      </div>
-    </UserContext.Provider>
+          <Footer name="Roshan" />
+        </div>
+      </UserContext.Provider>
+    </Provider>
   );
 };
 
@@ -45,6 +50,7 @@ const router = (
         <Route index element={<Body />} />
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
+        <Route path="cart" element={<Cart />} />
         <Route
           path="grocery"
           element={

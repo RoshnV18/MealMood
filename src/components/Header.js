@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { Link } from "react-router";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [input, setInput] = useState("login");
@@ -9,6 +10,8 @@ const Header = () => {
   const onlineStatus = useOnlineStatus();
 
   const { loggedInUser } = useContext(UserContext);
+
+  const cartItems = useSelector((store) => store.cart.items);
 
   const handleClick = () => {
     input === "login" ? setInput("logout") : setInput("login");
@@ -60,7 +63,12 @@ const Header = () => {
               </Link>
             </li>
             <li className="text-gray-700 hover:text-blue-600 cursor-pointer transition-colors duration-200">
-              Cart
+              <Link
+                to="/cart"
+                className="text-gray-700 hover:text-blue-600 transition-colors duration-200 no-underline"
+              >
+                Cart ({cartItems.length})
+              </Link>
             </li>
 
             <button

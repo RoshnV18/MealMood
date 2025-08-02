@@ -1,9 +1,12 @@
+import { useState } from "react";
 import ItemList from "./ItemList";
 
 const RestraunCategory = ({ resData, showIndex, setShowIndex, index }) => {
   const handleClick = () => {
     setShowIndex(showIndex === index ? null : index);
   };
+  const isOpen = showIndex === index;
+  const arrow = isOpen ? "⬆" : "⬇";
 
   return (
     <div className="w-6/12 mx-auto my-4 bg-gray-100  p-4  rounded-lg  shadow-sm">
@@ -14,7 +17,7 @@ const RestraunCategory = ({ resData, showIndex, setShowIndex, index }) => {
         <span className="font-bold ">
           {resData.title} ({resData.itemCards.length})
         </span>
-        <span className="text-xl mr-4">⬇️</span>
+        <span className="text-xl mr-4">{arrow}</span>
       </div>
       {showIndex === index && <ItemList items={resData?.itemCards} />}
     </div>
