@@ -3,7 +3,7 @@ import { CDN_URL } from "../utils/constants";
 
 const ItemList = ({ items, buttoLabel, onClick }) => {
   return (
-    <div>
+    <div className="space-y-4">
       {items.map((item) => {
         const itemInfo = item.card.info;
         const price = (itemInfo.price || itemInfo.defaultPrice) / 100;
@@ -18,34 +18,34 @@ const ItemList = ({ items, buttoLabel, onClick }) => {
 
         return (
           <div
-            className="text-left p-2 m-2 flex justify-between border-b-2 border-gray-300"
+            className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b-2 border-gray-200 p-4 rounded-md shadow-sm bg-white"
             key={itemInfo.id}
           >
-            {/* Item Info */}
-            <div className="w-9/12">
-              <div className="my-2">
-                <span className="font-semibold text-sm">{itemInfo.name}</span>
-                <span className="font-semibold text-sm"> - ₹{price}</span>
+            <div className="flex-1 sm:pr-4">
+              <div className="mb-1">
+                <h3 className="text-base sm:text-lg font-semibold text-gray-800">
+                  {itemInfo.name}
+                </h3>
+                <p className="text-sm text-gray-600">₹{price}</p>
               </div>
-              <p className="text-xs">
+              <p className="text-xs sm:text-sm text-gray-500">
                 {itemInfo.description ||
                   "There is no description for this item."}
               </p>
             </div>
 
-            {/* Item Image + Button */}
-            <div className="h-20 my-2 w-3/12 relative">
+            <div className="flex flex-col items-center mt-4 sm:mt-0 sm:w-28">
+              <img
+                src={CDN_URL + itemInfo.imageId}
+                alt={itemInfo.name}
+                className="rounded-lg w-20 h-20 object-cover mb-2"
+              />
               <button
-                className="absolute bottom-0 left-1/2 transform -translate-x-1/2 px-2 py-1 bg-black text-white rounded-sm cursor-pointer"
+                className="px-3 py-1 text-sm bg-black text-white rounded shadow hover:bg-gray-800"
                 onClick={handleButtonClick}
               >
                 {buttoLabel}
               </button>
-              <img
-                src={CDN_URL + itemInfo.imageId}
-                alt={itemInfo.name}
-                className="rounded-lg w-20 h-20 mx-auto object-cover"
-              />
             </div>
           </div>
         );

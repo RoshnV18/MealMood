@@ -1,7 +1,5 @@
 import { Link } from "react-router";
 
-import { InstagramIcon } from "lucide-react";
-
 const Footer = () => {
   return (
     <footer className="bg-[#f1f0f0]  text-center py-6 text-sm text-gray-600">

@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 const Header = () => {
   const [input, setInput] = useState("login");
   const onlineStatus = useOnlineStatus();
-  const { loggedInUser } = useContext(UserContext);
+
   const cartItems = useSelector((store) => store.cart.items);
 
   const handleClick = () => {
@@ -43,7 +43,7 @@ const Header = () => {
                 Contact Us
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link
                 to="/grocery"
                 className="text-gray-700 hover:text-blue-600 transition-colors duration-200 no-underline"
@@ -51,6 +51,7 @@ const Header = () => {
                 Grocery
               </Link>
             </li>
+             */}
             <li>
               <Link
                 to="/about"
@@ -68,18 +69,19 @@ const Header = () => {
               </Link>
             </li>
             <li>
-              <button
-                className={`${
-                  input === "logout"
-                    ? "bg-red-600 hover:bg-red-700"
-                    : "bg-blue-600 hover:bg-blue-700"
-                } text-white px-4 py-2 rounded-lg transition-colors duration-200 border-none cursor-pointer font-medium w-full sm:w-auto`}
-                onClick={handleClick}
-              >
-                {input}
-              </button>
+              <Link to="/login">
+                <button
+                  className={`${
+                    input === "logout"
+                      ? "bg-red-600 hover:bg-red-700"
+                      : "bg-blue-600 hover:bg-blue-700"
+                  } text-white px-4 py-2 rounded-lg transition-colors duration-200 border-none cursor-pointer font-medium w-full sm:w-auto`}
+                  onClick={handleClick}
+                >
+                  {input}
+                </button>
+              </Link>
             </li>
-            <li className="text-sm text-gray-700">{loggedInUser}</li>
           </ul>
         </nav>
       </div>

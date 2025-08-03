@@ -13,6 +13,7 @@ import UserContext from "./utils/UserContext";
 import { store } from "./utils/store";
 import { Provider } from "react-redux";
 import Cart from "./components/Cart";
+import Login from "./components/Login";
 
 const Grocery = lazy(() => import("./components/Grocery"));
 
@@ -51,6 +52,7 @@ const router = (
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
         <Route path="cart" element={<Cart />} />
+        <Route path="login" element={<Login />} />
         <Route
           path="grocery"
           element={
