@@ -10,21 +10,35 @@ const useRestrauntMenu = (resId) => {
   }, []);
 
   const fetchMenu = async () => {
-    const data = await fetch(proxyUrl + MENU_API + resId);
-    const json = await data.json();
+    try {
+      const res = await fetch(proxyUrl + MENU_API + resId);
+      const text = await res.text();
 
-    setResItem(json.data);
+      let json;
+      try {
+        json = JSON.parse(text);
+      } catch (err) {
+        console.error("Invalid JSON returned:", text);
+        return;
+      }
 
-    const regularCards =
-      json?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards || [];
+      setResItem(json.data);
 
-    const category = regularCards.filter(
-      (c) =>
-        c?.card?.card?.["@type"] ===
-        "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
-    );
+      const regularCards =
+        json?.data?.cards?.find(
+          (c) => c?.groupedCard?.cardGroupMap?.REGULAR?.cards
+        )?.groupedCard?.cardGroupMap?.REGULAR?.cards || [];
 
-    setCategory(category || []);
+      const itemCategories = regularCards.filter(
+        (c) =>
+          c?.card?.card?.["@type"] ===
+          "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+      );
+
+      setCategory(itemCategories || []);
+    } catch (err) {
+      console.error("Fetch failed:", err.message);
+    }
   };
 
   return { resItem, category };

@@ -20,15 +20,32 @@ const Body = () => {
 
   const fetchData = async () => {
     try {
-      const data = await fetch(proxyUrl + swiggyUrl);
-      const json = await data.json();
+      const res = await fetch(proxyUrl + swiggyUrl);
+      const text = await res.text();
+
+      let json;
+      try {
+        json = JSON.parse(text);
+      } catch (e) {
+        console.error("Invalid JSON:", text);
+        setError("Failed to fetch restaurant data.");
+        return;
+      }
+
       const restraurants =
         json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants;
+
+      if (!restraurants) {
+        setError("Restaurants data not found.");
+        return;
+      }
+
       setListOfRes(restraurants);
       setFilteredRes(restraurants);
-    } catch (error) {
-      setError(error.message);
+    } catch (err) {
+      console.error("Fetch error:", err);
+      setError("Something went wrong.");
     }
   };
 
