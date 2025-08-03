@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { MENU_API } from "./constants";
+import { MENU_API, proxyUrl } from "./constants";
 
 const useRestrauntMenu = (resId) => {
   const [resItem, setResItem] = useState(null);
@@ -10,7 +10,7 @@ const useRestrauntMenu = (resId) => {
   }, []);
 
   const fetchMenu = async () => {
-    const data = await fetch(MENU_API + resId);
+    const data = await fetch(proxyUrl + MENU_API + resId);
     const json = await data.json();
 
     setResItem(json.data);

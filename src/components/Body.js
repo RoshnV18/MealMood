@@ -4,6 +4,7 @@ import Shimmer from "./Shimmer";
 import { useEffect, useState } from "react";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import Error from "./Error";
+import { proxyUrl, swiggyUrl } from "../utils/constants";
 
 const Body = () => {
   const [listOfRes, setListOfRes] = useState([]);
@@ -19,12 +20,7 @@ const Body = () => {
 
   const fetchData = async () => {
     try {
-      const data = await fetch(
-        "https://corsproxy.io/?" +
-          encodeURIComponent(
-            "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING"
-          )
-      );
+      const data = await fetch(proxyUrl + swiggyUrl);
       const json = await data.json();
       const restraurants =
         json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
