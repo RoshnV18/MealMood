@@ -4,7 +4,7 @@ import Shimmer from "./Shimmer";
 import { useEffect, useState } from "react";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import Error from "./Error";
-import { proxyUrl, swiggyUrl } from "../utils/constants";
+import { swiggyUrl } from "../utils/constants";
 
 const Body = () => {
   const [listOfRes, setListOfRes] = useState([]);
@@ -20,32 +20,15 @@ const Body = () => {
 
   const fetchData = async () => {
     try {
-      const res = await fetch(proxyUrl + swiggyUrl);
-      const text = await res.text();
-
-      let json;
-      try {
-        json = JSON.parse(text);
-      } catch (e) {
-        console.error("Invalid JSON:", text);
-        setError("Failed to fetch restaurant data.");
-        return;
-      }
-
+      const data = await fetch(swiggyUrl);
+      const json = await data.json();
       const restraurants =
         json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants;
-
-      if (!restraurants) {
-        setError("Restaurants data not found.");
-        return;
-      }
-
       setListOfRes(restraurants);
       setFilteredRes(restraurants);
-    } catch (err) {
-      console.error("Fetch error:", err);
-      setError("Something went wrong.");
+    } catch (error) {
+      setError(error.message);
     }
   };
 

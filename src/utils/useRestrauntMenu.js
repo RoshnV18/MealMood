@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { MENU_API, proxyUrl } from "./constants";
+import { getMenuUrl } from "./constants";
 
 const useRestrauntMenu = (resId) => {
   const [resItem, setResItem] = useState(null);
@@ -7,20 +7,12 @@ const useRestrauntMenu = (resId) => {
 
   useEffect(() => {
     fetchMenu();
-  }, []);
+  }, [resId]);
 
   const fetchMenu = async () => {
     try {
-      const res = await fetch(proxyUrl + MENU_API + resId);
-      const text = await res.text();
-
-      let json;
-      try {
-        json = JSON.parse(text);
-      } catch (err) {
-        console.error("Invalid JSON returned:", text);
-        return;
-      }
+      const response = await fetch(getMenuUrl(resId));
+      const json = await response.json();
 
       setResItem(json.data);
 
