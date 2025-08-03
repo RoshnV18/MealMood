@@ -6,11 +6,8 @@ import { useSelector } from "react-redux";
 
 const Header = () => {
   const [input, setInput] = useState("login");
-
   const onlineStatus = useOnlineStatus();
-
   const { loggedInUser } = useContext(UserContext);
-
   const cartItems = useSelector((store) => store.cart.items);
 
   const handleClick = () => {
@@ -18,16 +15,16 @@ const Header = () => {
   };
 
   return (
-    <div className="sticky top-0 z-50 bg-white shadow-md ">
-      <div className="flex flex-col items-center h-24 bg-[#F6F6F6] sm:flex-row sm:justify-between  px-4 py-3 gap-3 sm:gap-0">
+    <div className="sticky top-0 z-50  bg-[#F6F6F6] shadow-md ">
+      <div className="flex flex-col items-center  sm:flex-row sm:justify-between px-4  py-3 gap-3 sm:gap-0 sm:h-auto ">
         <div className="flex items-center space-x-3">
           <div className="text-3xl">🍔</div>
           <div className="text-xl font-bold text-gray-800">MealMood</div>
         </div>
 
-        <div className="flex flex-wrap justify-center sm:justify-end items-center gap-4">
-          <ul className="flex flex-wrap items-center space-x-4 list-none m-0 p-0">
-            <li className="flex items-center text-sm font-medium text-gray-600">
+        <nav className="flex flex-col sm:flex-row justify-center sm:justify-end items-center gap-3 sm:gap-4 w-full sm:w-auto">
+          <ul className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-4 list-none m-0 p-0 text-center w-full sm:w-auto">
+            <li className="text-sm font-medium text-gray-600">
               Online Status: {onlineStatus ? "🟢" : "🔴"}
             </li>
             <li>
@@ -62,7 +59,7 @@ const Header = () => {
                 About Us
               </Link>
             </li>
-            <li className="text-gray-700 hover:text-blue-600 cursor-pointer transition-colors duration-200">
+            <li>
               <Link
                 to="/cart"
                 className="text-gray-700 hover:text-blue-600 transition-colors duration-200 no-underline"
@@ -70,20 +67,21 @@ const Header = () => {
                 Cart ({cartItems.length})
               </Link>
             </li>
-
-            <button
-              className={`${
-                input === "logout"
-                  ? "bg-red-600 hover:bg-red-700"
-                  : "bg-blue-600 hover:bg-blue-700"
-              } text-white px-4 py-2 rounded-lg transition-colors duration-200 border-none cursor-pointer font-medium`}
-              onClick={handleClick}
-            >
-              {input}
-            </button>
-            <li>{loggedInUser}</li>
+            <li>
+              <button
+                className={`${
+                  input === "logout"
+                    ? "bg-red-600 hover:bg-red-700"
+                    : "bg-blue-600 hover:bg-blue-700"
+                } text-white px-4 py-2 rounded-lg transition-colors duration-200 border-none cursor-pointer font-medium w-full sm:w-auto`}
+                onClick={handleClick}
+              >
+                {input}
+              </button>
+            </li>
+            <li className="text-sm text-gray-700">{loggedInUser}</li>
           </ul>
-        </div>
+        </nav>
       </div>
     </div>
   );

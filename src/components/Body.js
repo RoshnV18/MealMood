@@ -69,17 +69,19 @@ const Body = () => {
       </div>
     );
   }
-  if (!listOfRes) {
+
+  if (!listOfRes || listOfRes.length === 0) {
     return <Shimmer />;
   }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-gray-50 to-blue-50 py-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Search and Filter Section */}
         <div className="mb-10">
-          <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-start sm:items-center justify-between">
             <button
-              className="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold shadow-md cursor-pointer"
+              className="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold shadow-md cursor-pointer w-full sm:w-auto"
               onClick={() => {
                 const filteredList = listOfRes.filter(
                   (res) => res?.info?.avgRating > 4.5
@@ -108,7 +110,8 @@ const Body = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10">
+        {/* Restaurant Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
           {filteredRes.map((restro) => (
             <Link
               key={restro?.info?.id}
@@ -124,6 +127,7 @@ const Body = () => {
           ))}
         </div>
 
+        {/* No Results Message */}
         {filteredRes.length === 0 && listOfRes.length > 0 && (
           <div className="text-center py-16">
             <div className="text-6xl mb-4">😔</div>
